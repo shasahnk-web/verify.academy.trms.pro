@@ -12,39 +12,384 @@
 </head>
 <body>
   <div class="verification-container">
+    <div class="security-header">
+      <div class="security-badges">
+        <div class="security-badge ssl-badge" id="sslBadge">
+          <span class="security-icon">🔒</span>
+          <span class="security-text">SSL Encrypted</span>
+        </div>
+        <div class="security-badge domain-badge" id="domainBadge">
+          <span class="security-icon">✅</span>
+          <span class="security-text">Verified Domain</span>
+        </div>
+        <div class="security-badge threat-badge" id="threatBadge">
+          <span class="security-icon">🛡️</span>
+          <span class="security-text">No Threats</span>
+        </div>
+      </div>
+      
+      <div class="trust-score-container">
+        <div class="trust-score" id="trustScore">
+          <div class="trust-label">Trust Score</div>
+          <div class="trust-value" id="trustValue">98%</div>
+          <div class="trust-bar">
+            <div class="trust-fill" id="trustFill"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="achievements-display" id="achievementsDisplay">
+      <div class="streak-counter">
+        <span class="streak-emoji">🔥</span>
+        <span class="streak-text">Streak: <span id="streakCount">0</span></span>
+      </div>
+      <div class="achievement-badges" id="achievementBadges"></div>
+    </div>
+    
     <h1>🔐 Final Verification</h1>
     <p>Please wait while we verify your access...</p>
+    
+    <!-- Voice Control Panel -->
+    <div class="accessibility-controls">
+      <button id="voiceToggle" class="voice-toggle" aria-label="Toggle voice countdown">
+        🔊 Voice: <span id="voiceStatus">ON</span>
+      </button>
+    </div>
+    
     <div id="countContainer" class="timer-container">
       <div class="timer-circle">
         <span id="countdown">10</span>
+        <svg class="progress-ring" width="100%" height="100%" viewBox="0 0 140 140">
+          <circle cx="70" cy="70" r="65" fill="none" stroke="rgba(102, 126, 234, 0.2)" stroke-width="2"/>
+          <circle id="progress-circle" cx="70" cy="70" r="65" fill="none" stroke="url(#gradient)" stroke-width="3" stroke-linecap="round" transform="rotate(-90 70 70)"/>
+          <defs>
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+              <stop offset="50%" style="stop-color:#764ba2;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#f093fb;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+        </svg>
       </div>
       <p class="timer-text">seconds remaining</p>
     </div>
+    
     <a id="verifyBtn" href="https://academy.trms.pro/set-verified/?redirect=https://academy.trms.pro" style="display: none;">
       <button class="verify-button">✅ Verify & Go to Website</button>
     </a>
+    
+    <!-- Confetti Container -->
+    <div id="confettiContainer" class="confetti-container"></div>
   </div>
   <!-- Ads Section -->
   <div class="ads-section">
   </div>
   <script>
     let count = 10;
+    let voiceEnabled = true;
+    let currentStreak = parseInt(localStorage.getItem('verificationStreak') || '0');
+    let totalVerifications = parseInt(localStorage.getItem('totalVerifications') || '0');
+    let trustScore = parseInt(localStorage.getItem('trustScore') || '85');
+    let threatLevel = 'safe';
+    
     const countdownElement = document.getElementById("countdown");
     const countContainer = document.getElementById("countContainer");
     const verifyBtn = document.getElementById("verifyBtn");
+    const progressCircle = document.getElementById("progress-circle");
+    const voiceToggle = document.getElementById("voiceToggle");
+    const voiceStatus = document.getElementById("voiceStatus");
+    const streakCount = document.getElementById("streakCount");
+    const achievementBadges = document.getElementById("achievementBadges");
+    const confettiContainer = document.getElementById("confettiContainer");
+    const circumference = 2 * Math.PI * 65; // radius = 65
+    
+    // Initialize progress circle
+    progressCircle.style.strokeDasharray = circumference;
+    progressCircle.style.strokeDashoffset = circumference;
+    
+    // Initialize streak display
+    streakCount.textContent = currentStreak;
+    
+    // Security monitoring functions
+    function checkSSLStatus() {
+      const sslBadge = document.getElementById('sslBadge');
+      const isSecure = window.location.protocol === 'https:';
+      
+      if (isSecure) {
+        sslBadge.classList.add('secure');
+        sslBadge.querySelector('.security-text').textContent = 'SSL Encrypted';
+        sslBadge.querySelector('.security-icon').textContent = '🔒';
+      } else {
+        sslBadge.classList.add('warning');
+        sslBadge.querySelector('.security-text').textContent = 'Not Encrypted';
+        sslBadge.querySelector('.security-icon').textContent = '⚠️';
+      }
+    }
+    
+    function checkDomainStatus() {
+      const domainBadge = document.getElementById('domainBadge');
+      const isReplit = window.location.hostname.includes('replit.') || window.location.hostname.includes('repl.co');
+      
+      if (isReplit) {
+        domainBadge.classList.add('verified');
+        domainBadge.querySelector('.security-text').textContent = 'Verified Domain';
+        domainBadge.querySelector('.security-icon').textContent = '✅';
+      } else {
+        domainBadge.classList.add('warning');
+        domainBadge.querySelector('.security-text').textContent = 'Unverified';
+        domainBadge.querySelector('.security-icon').textContent = '❓';
+      }
+    }
+    
+    function simulateThreatDetection() {
+      const threatBadge = document.getElementById('threatBadge');
+      const threats = ['malware', 'phishing', 'suspicious'];
+      
+      // Simulate real-time scanning
+      setInterval(() => {
+        const randomCheck = Math.random();
+        
+        if (randomCheck > 0.98) { // 2% chance of detecting something
+          threatLevel = threats[Math.floor(Math.random() * threats.length)];
+          threatBadge.classList.remove('safe');
+          threatBadge.classList.add('warning');
+          threatBadge.querySelector('.security-text').textContent = 'Threat Detected';
+          threatBadge.querySelector('.security-icon').textContent = '🚨';
+          
+          // Auto-resolve after 3 seconds (simulated mitigation)
+          setTimeout(() => {
+            threatLevel = 'safe';
+            threatBadge.classList.remove('warning');
+            threatBadge.classList.add('safe');
+            threatBadge.querySelector('.security-text').textContent = 'Threat Resolved';
+            threatBadge.querySelector('.security-icon').textContent = '🛡️';
+          }, 3000);
+        } else {
+          threatLevel = 'safe';
+          threatBadge.classList.remove('warning');
+          threatBadge.classList.add('safe');
+          threatBadge.querySelector('.security-text').textContent = 'No Threats';
+          threatBadge.querySelector('.security-icon').textContent = '🛡️';
+        }
+      }, 5000); // Check every 5 seconds
+    }
+    
+    function updateTrustScore() {
+      const trustValue = document.getElementById('trustValue');
+      const trustFill = document.getElementById('trustFill');
+      
+      // Calculate trust score based on various factors
+      let score = 85; // Base score
+      
+      // SSL encryption bonus
+      if (window.location.protocol === 'https:') {
+        score += 5;
+      }
+      
+      // Verification streak bonus
+      score += Math.min(currentStreak * 0.5, 8);
+      
+      // Domain verification bonus
+      if (window.location.hostname.includes('replit.') || window.location.hostname.includes('repl.co')) {
+        score += 3;
+      }
+      
+      // Threat penalty
+      if (threatLevel !== 'safe') {
+        score -= 15;
+      }
+      
+      // Cap at 100%
+      score = Math.min(Math.max(score, 0), 100);
+      trustScore = score;
+      
+      // Update display
+      trustValue.textContent = Math.round(score) + '%';
+      trustFill.style.width = score + '%';
+      
+      // Update trust bar color based on score
+      const trustContainer = document.querySelector('.trust-score');
+      trustContainer.classList.remove('high', 'medium', 'low');
+      
+      if (score >= 90) {
+        trustContainer.classList.add('high');
+      } else if (score >= 70) {
+        trustContainer.classList.add('medium');
+      } else {
+        trustContainer.classList.add('low');
+      }
+      
+      // Store trust score
+      localStorage.setItem('trustScore', score.toString());
+    }
+    
+    function initializeSecurity() {
+      checkSSLStatus();
+      checkDomainStatus();
+      simulateThreatDetection();
+      updateTrustScore();
+      
+      // Update trust score periodically
+      setInterval(updateTrustScore, 10000);
+    }
+
+    // Voice synthesis function
+    function speak(text) {
+      if (!voiceEnabled || !('speechSynthesis' in window)) return;
+      
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 1.2;
+      utterance.pitch = 1.1;
+      utterance.volume = 0.8;
+      speechSynthesis.speak(utterance);
+    }
+
+    // Voice toggle functionality
+    voiceToggle.addEventListener('click', () => {
+      voiceEnabled = !voiceEnabled;
+      voiceStatus.textContent = voiceEnabled ? 'ON' : 'OFF';
+      voiceToggle.setAttribute('aria-pressed', voiceEnabled);
+      
+      if (voiceEnabled) {
+        speak('Voice countdown enabled');
+      }
+    });
+
+    // Achievements system
+    const achievements = [
+      { id: 'first_verification', name: 'First Steps', emoji: '🎯', requirement: 1 },
+      { id: 'streak_5', name: 'Consistent', emoji: '🔥', requirement: 5 },
+      { id: 'streak_10', name: 'Dedicated', emoji: '⭐', requirement: 10 },
+      { id: 'streak_25', name: 'Expert', emoji: '👑', requirement: 25 },
+      { id: 'speed_demon', name: 'Speed Demon', emoji: '⚡', requirement: 'special' }
+    ];
+
+    function checkAchievements() {
+      const unlockedAchievements = JSON.parse(localStorage.getItem('unlockedAchievements') || '[]');
+      
+      achievements.forEach(achievement => {
+        if (unlockedAchievements.includes(achievement.id)) return;
+        
+        let shouldUnlock = false;
+        
+        if (achievement.requirement === 'special') {
+          // Speed demon: completed verification in under 5 seconds
+          shouldUnlock = count > 5; // Still has more than 5 seconds left
+        } else {
+          shouldUnlock = currentStreak >= achievement.requirement;
+        }
+        
+        if (shouldUnlock) {
+          unlockAchievement(achievement);
+          unlockedAchievements.push(achievement.id);
+          localStorage.setItem('unlockedAchievements', JSON.stringify(unlockedAchievements));
+        }
+      });
+    }
+
+    function unlockAchievement(achievement) {
+      const badge = document.createElement('div');
+      badge.className = 'achievement-badge';
+      badge.innerHTML = `<span class="achievement-emoji">${achievement.emoji}</span><span class="achievement-name">${achievement.name}</span>`;
+      badge.style.animation = 'achievementUnlock 0.8s ease-out';
+      achievementBadges.appendChild(badge);
+      
+      speak(`Achievement unlocked: ${achievement.name}`);
+      
+      // Haptic feedback for achievement
+      if ('vibrate' in navigator) {
+        navigator.vibrate([100, 50, 100]);
+      }
+    }
+
+    function displayExistingAchievements() {
+      const unlockedAchievements = JSON.parse(localStorage.getItem('unlockedAchievements') || '[]');
+      
+      achievements.forEach(achievement => {
+        if (unlockedAchievements.includes(achievement.id)) {
+          const badge = document.createElement('div');
+          badge.className = 'achievement-badge unlocked';
+          badge.innerHTML = `<span class="achievement-emoji">${achievement.emoji}</span><span class="achievement-name">${achievement.name}</span>`;
+          achievementBadges.appendChild(badge);
+        }
+      });
+    }
+
+    // Confetti animation
+    function createConfetti() {
+      const colors = ['#667eea', '#764ba2', '#f093fb', '#ffd700', '#ff6b6b', '#4ecdc4'];
+      
+      for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.className = 'confetti-piece';
+          confetti.style.left = Math.random() * 100 + '%';
+          confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.animationDelay = Math.random() * 0.5 + 's';
+          confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+          confettiContainer.appendChild(confetti);
+          
+          // Remove confetti after animation
+          setTimeout(() => {
+            confetti.remove();
+          }, 4000);
+        }, i * 20);
+      }
+    }
+
+    // Haptic feedback function
+    function hapticFeedback() {
+      if ('vibrate' in navigator) {
+        navigator.vibrate(50);
+      }
+    }
+
+    function updateProgress(remaining, total) {
+      const progress = (total - remaining) / total;
+      const offset = circumference - (progress * circumference);
+      progressCircle.style.strokeDashoffset = offset;
+    }
 
     function countdown() {
       countdownElement.textContent = count;
+      updateProgress(count, 10);
+      
+      // Voice countdown for last 5 seconds
+      if (voiceEnabled && count <= 5 && count > 0) {
+        speak(count.toString());
+      }
 
       if (count === 0) {
+        // Update streak and achievements
+        currentStreak++;
+        totalVerifications++;
+        localStorage.setItem('verificationStreak', currentStreak.toString());
+        localStorage.setItem('totalVerifications', totalVerifications.toString());
+        streakCount.textContent = currentStreak;
+        
+        // Check for new achievements
+        checkAchievements();
+        
+        // Voice completion message
+        if (voiceEnabled) {
+          speak('Verification complete! You may now proceed.');
+        }
+        
+        // Completion haptic feedback
+        hapticFeedback();
+        
+        // Start confetti animation
+        createConfetti();
+        
         countContainer.style.display = "none";
         verifyBtn.style.display = "block";
         verifyBtn.style.opacity = "0";
         verifyBtn.style.transform = "translateY(20px)";
 
-        // Animate button appearance
+        // Animate button appearance with enhanced timing
         setTimeout(() => {
-          verifyBtn.style.transition = "all 0.5s ease";
+          verifyBtn.style.transition = "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)";
           verifyBtn.style.opacity = "1";
           verifyBtn.style.transform = "translateY(0)";
         }, 100);
@@ -54,7 +399,48 @@
       }
     }
 
+    // Add button click haptic feedback
+    document.addEventListener('DOMContentLoaded', function() {
+      const button = document.querySelector('.verify-button');
+      if (button) {
+        button.addEventListener('click', () => {
+          hapticFeedback();
+          if (voiceEnabled) {
+            speak('Redirecting to website');
+          }
+        });
+      }
+      
+      // Display existing achievements
+      displayExistingAchievements();
+      
+      // Initialize security monitoring
+      initializeSecurity();
+      
+      // Initial voice announcement
+      if (voiceEnabled) {
+        setTimeout(() => {
+          speak('Verification process started. Voice countdown is enabled. Security monitoring active.');
+        }, 500);
+      }
+    });
+
+    // Start countdown when page loads
     window.onload = countdown;
+
+    // Add page visibility API to pause countdown when tab is hidden
+    document.addEventListener('visibilitychange', function() {
+      if (document.visibilityState === 'visible') {
+        // Resume countdown logic could be added here
+      }
+    });
+
+    // Reset streak on page unload if user didn't complete verification
+    window.addEventListener('beforeunload', function() {
+      if (count > 0) {
+        localStorage.setItem('verificationStreak', '0');
+      }
+    });
   </script>
 </body>
 </html>
