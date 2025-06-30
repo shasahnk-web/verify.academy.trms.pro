@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta name="google-adsense-account" content="ca-pub-1281450261924955">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1281450261924955"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification Required - Step 2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="/verify/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="content">
+            <!-- Top banner ad -->
+            <div class="ad-placeholder">
+                <p>Advertisement Space - Top Banner</p>
+                <small>728x90 Leaderboard Ad</small>
+            </div>
+
+            <div class="verification-section">
+                <div class="timer-container">
+                    <div class="timer" id="timer">10</div>
+                    <p>Please wait...</p>
+                </div>
+
+                <button class="continue-btn" id="continueBtn" style="display: none;">
+                    Continue
+                </button>
+            </div>
+
+            <h1>Verification Required</h1>
+            <p>Step 2 of 3 - Almost there!</p>
+
+            <!-- Square ad -->
+            <div class="ad-placeholder">
+                <p>Advertisement Space - Square Ad</p>
+                <small>300x250 Medium Rectangle</small>
+            </div>
+
+            <!-- Additional Google AdSense units -->
+            <div class="ad-placeholder">
+                <p>Google AdSense - Auto Ads</p>
+                <small>Responsive Display Ad</small>
+            </div>
+
+            <div style="display: flex; gap: 10px; margin: 15px 0;">
+                <div class="ad-placeholder" style="flex: 1;">
+                    <p>Google AdSense</p>
+                    <small>336x280 Large Rectangle</small>
+                </div>
+                <div class="ad-placeholder" style="flex: 1;">
+                    <p>Google AdSense</p>
+                    <small>300x600 Half Page</small>
+                </div>
+            </div>
+
+            <div class="ad-placeholder">
+                <p>Google AdSense - In-feed</p>
+                <small>Responsive In-feed Ad</small>
+            </div>
+
+            <!-- Bottom section for proceed button -->
+            <div class="bottom-section" id="bottomSection" style="display: none;">
+                <!-- Multiple ad placements -->
+                <div class="ad-placeholder">
+                    <p>Google AdSense - Premium Billboard</p>
+                    <small>970x250 Billboard Ad</small>
+                </div>
+
+                <div style="display: flex; gap: 15px; margin: 20px 0;">
+                    <div class="ad-placeholder" style="flex: 1;">
+                        <p>Google AdSense</p>
+                        <small>300x600 Half Page</small>
+                    </div>
+                    <div class="ad-placeholder" style="flex: 1;">
+                        <p>Google AdSense</p>
+                        <small>300x250 Medium Rectangle</small>
+                    </div>
+                    <div class="ad-placeholder" style="flex: 1;">
+                        <p>Google AdSense</p>
+                        <small>320x480 Portrait</small>
+                    </div>
+                </div>
+
+                <!-- Additional Google AdSense placements -->
+                <div class="ad-placeholder">
+                    <p>Google AdSense - Video Ad</p>
+                    <small>640x360 Video Advertisement</small>
+                </div>
+
+                <div style="display: flex; gap: 10px; margin: 15px 0;">
+                    <div class="ad-placeholder" style="flex: 1;">
+                        <p>Google AdSense</p>
+                        <small>728x90 Leaderboard</small>
+                    </div>
+                </div>
+
+                <button class="proceed-btn" id="proceedBtn">
+                    Proceed to Next Step
+                </button>
+
+                <!-- Multiple footer ads -->
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <div class="ad-placeholder" style="flex: 1;">
+                        <p>Google AdSense</p>
+                        <small>320x100 Large Mobile</small>
+                    </div>
+                    <div class="ad-placeholder" style="flex: 1;">
+                        <p>Google AdSense</p>
+                        <small>320x100 Large Mobile</small>
+                    </div>
+                </div>
+
+                <div class="ad-placeholder" style="margin-top: 15px;">
+                    <p>Google AdSense - Sticky/Anchor</p>
+                    <small>728x90 Footer Banner</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let countdown = 10;
+        const timerElement = document.getElementById('timer');
+        const continueBtn = document.getElementById('continueBtn');
+        const bottomSection = document.getElementById('bottomSection');
+        const proceedBtn = document.getElementById('proceedBtn');
+
+        // Start countdown
+        const countdownInterval = setInterval(() => {
+            countdown--;
+            timerElement.textContent = countdown;
+
+            if (countdown <= 0) {
+                clearInterval(countdownInterval);
+                showContinueButton();
+            }
+        }, 1000);
+
+        function showContinueButton() {
+            timerElement.parentElement.style.display = 'none';
+            continueBtn.style.display = 'block';
+            continueBtn.classList.add('fade-in');
+        }
+
+        // Continue button click handler
+        continueBtn.addEventListener('click', () => {
+            continueBtn.style.display = 'none';
+            bottomSection.style.display = 'block';
+            bottomSection.classList.add('fade-in');
+
+            // Smooth scroll to bottom
+            bottomSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+        });
+
+        // Proceed button click handler
+        proceedBtn.addEventListener('click', () => {
+            window.location.href = '/verify/verify3.html';
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-1281450261924955">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1281450261924955"
+     crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <title>Verification Process</title>
+  <script defer='45952' src='//api.linkshortify.com/verify.js'></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/verify/verify.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="verification-container">
+    <h1>🔐 Final Verification</h1>
+    <p>Please wait while we verify your access...</p>
+    <div id="countContainer" class="timer-container">
+      <div class="timer-circle">
+        <span id="countdown">10</span>
+      </div>
+      <p class="timer-text">seconds remaining</p>
+    </div>
+    <!-- Chnage  -->
+    <!-- index.html   to  https://neotrms.com/set-verified/?redirect=https://neotrms.com  -->
+    <a id="verifyBtn" href="/index.html" style="display: none;">
+       <!-- index.html   to  https://neotrms.com/set-verified/?redirect=https://neotrms.com  -->
+      <!-- Chnage -->
+      <button class="verify-button">✅ Verify & Go to Website</button>
+    </a>
+  </div>
+  <!-- Ads Section -->
+  <div class="ads-section">
+  </div>
+  <script>
+    let count = 10;
+    const countdownElement = document.getElementById("countdown");
+    const countContainer = document.getElementById("countContainer");
+    const verifyBtn = document.getElementById("verifyBtn");
+
+    function updateTimer() {
+      countdownElement.textContent = count;
+      
+      if (count <= 0) {
+        countContainer.style.display = "none";
+        verifyBtn.style.display = "block";
+        verifyBtn.style.opacity = "0";
+        verifyBtn.style.transform = "translateY(20px)";
+
+        // Animate button appearance
+        setTimeout(() => {
+          verifyBtn.style.transition = "all 0.5s ease";
+          verifyBtn.style.opacity = "1";
+          verifyBtn.style.transform = "translateY(0)";
+        }, 100);
+      }
+    }
+
+    function startCountdown() {
+      updateTimer(); // Display initial count
+      
+      const interval = setInterval(() => {
+        count--;
+        updateTimer();
+        
+        if (count <= 0) {
+          clearInterval(interval);
+        }
+      }, 1000);
+    }
+
+    window.onload = startCountdown;
+  </script>
+</body>
+</html>

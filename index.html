@@ -1,1 +1,232 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="google-adsense-account" content="ca-pub-1281450261924955">
+  <meta charset="UTF-8">
+  <script defer='45952' src='//api.linkshortify.com/verify.js'></script>
+  <title>SecureAccess Portal - Generate Your Key</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Secure access portal with multiple server options and verification system">
+  <link rel="stylesheet" href="index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>">
+</head>
+<body class="index-page">
+  <!-- Animated Background Elements -->
+  <div class="bg-elements">
+    <div class="floating-orb orb-1"></div>
+    <div class="floating-orb orb-2"></div>
+    <div class="floating-orb orb-3"></div>
+  </div>
+
+  <!-- Header Section -->
+  <header class="header-section">
+    <div class="logo-container">
+      <span class="logo-icon">🔐</span>
+      <h2 class="brand-title">SecureAccess</h2>
+    </div>
+    <div class="status-indicator">
+      <span class="status-dot"></span>
+     <span class="status-text"> System Online</span>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="container main-container">
+    <div class="hero-section">
+      <div class="hero-badge">
+        <span class="badge-icon">⚡</span>
+        <span>Instant Access</span>
+      </div>
+      <h1>Generate Your Access Key</h1>
+    </div>
+
+    <!-- Server Selection -->
+    <div class="server-section">
+
+      <div class="buttons server-grid">
+        <a href="#" onclick="openRandomLink()" class="server-card">
+          <div class="server-info">
+            <div class="server-icon">🚀</div>
+            <div class="server-details">
+              <div class="server-name">WEBSITE SERVER - 1 ✅</div>
+              <div class="server-location"></div>
+            </div>
+          </div>
+          <div class="server-status online">
+            <span class="status-indicator-mini"></span>
+            <span>Online</span>
+          </div>
+        </a>
+
+        <a style="display:none; pointer-events: none;" href="https://lksfy.com/SGtOYOyC" class="server-card">
+          <div class="server-info">
+            <div class="server-icon">⚡</div>
+            <div class="server-details">
+              <div class="server-name">WEBSITE SERVER - 2 (CURRENTLY NOT WORKING)</div>
+               <div class="server-name">We are working on it. Available in few time.😁</div>
+              <div class="server-location"></div>
+            </div>
+          </div>
+          <div class="server-status online">
+            <span class="status-indicator-mini"></span>
+            <span style="color:red;">Offline</span>
+          </div>
+        </a>
+
+
+    <a href="javascript:void(0)" onclick="
+  (function(){
+    var count = localStorage.getItem('limitedAccessCount') || 0;
+    count = parseInt(count);
+    if (count < 10) {
+      localStorage.setItem('limitedAccessCount', count+1);
+      window.location.href='/verify/index.html';
+    } else {
+      alert('Sorry, access limit reached!');
+    }
+  })();
+  return false;
+" style="pointer-events: auto;" class="server-card">
+  <div class="server-info">
+    <div class="server-icon">🧑‍💻</div>
+    <div class="server-details">
+      <div class="server-name">SERVER - 2 (Beta)</div>
+      <div class="server-name">On Testing (Admin)</div>
+      <div class="server-location"></div>
+    </div>
+  </div>
+  <div class="server-status online">
+    <span class="status-indicator-mini"></span>
+    <span style="color:aqua">Testing</span>
+  </div>
+</a>
+
+
+
+        <a href="https://youtu.be/uS2Eal1iO_g" class="server-card tutorial-card">
+          <div class="server-info">
+            <div class="server-icon">📹</div>
+            <div class="server-details">
+              <div class="server-name">TUTORIAL VIDEO</div>
+              <div class="server-location">Step-by-step guide</div>
+            </div>
+          </div>
+          <div class="server-status tutorial">
+            <span class="tutorial-badge">HELP</span>
+          </div>
+        </a>
+      </div>
+    </div>
+    
+
+    
+
+    <div class="help-section">
+      <div class="help-card">
+        <div class="help-icon">❓</div>
+        <div class="help-content">
+          <h4>Need Help?</h4>
+          <p><strong>Watch the tutorial video</strong> if you're unsure how to proceed. It covers the entire verification process step by step.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer-section">
+    <div class="footer-content">
+      <p>&copy; 2025 Shashank and Neotrms.com. All rights reserved.</p>
+      <div class="footer-links">
+        <span>🔒 Secure</span>
+        <span>⚡ Fast</span>
+        <span>🛡️ Protected</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Random link selection for Server 1
+    function openRandomLink() {
+      const links = [
+        '/verify.html',
+        '/verify.html'
+      ];
+      const randomIndex = Math.floor(Math.random() * links.length);
+      window.location.href = links[randomIndex];
+    }
+
+    // Animated counter for stats
+    function animateCounter(element, target, duration = 2000) {
+      const start = 0;
+      const increment = target / (duration / 16);
+      let current = start;
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        
+        if (target === 99.9) {
+          element.textContent = current.toFixed(1);
+        } else {
+          element.textContent = Math.floor(current);
+        }
+      }, 16);
+    }
+
+    // Initialize counters when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      const counters = document.querySelectorAll('.stat-number');
+      
+      // Delay animation start
+      setTimeout(() => {
+        counters.forEach(counter => {
+          const target = parseFloat(counter.getAttribute('data-target'));
+          animateCounter(counter, target);
+        });
+      }, 500);
+
+      // Add stagger animation to server cards
+      const serverCards = document.querySelectorAll('.server-card');
+      serverCards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+      });
+
+      // Add stagger animation to feature items
+      const featureItems = document.querySelectorAll('.feature-item');
+      featureItems.forEach((item, index) => {
+        item.style.animationDelay = `${index * 0.15}s`;
+      });
+    });
+
+    // Add hover effect to floating orbs
+    document.addEventListener('mousemove', (e) => {
+      const orbs = document.querySelectorAll('.floating-orb');
+      const mouseX = e.clientX / window.innerWidth;
+      const mouseY = e.clientY / window.innerHeight;
+      
+      orbs.forEach((orb, index) => {
+        const speed = (index + 1) * 20;
+        const x = mouseX * speed;
+        const y = mouseY * speed;
+        orb.style.transform = `translate(${x}px, ${y}px)`;
+      });
+    });
+
+    // Status indicator animation
+    const statusDot = document.querySelector('.status-dot');
+    if (statusDot) {
+      setInterval(() => {
+        statusDot.style.transform = 'scale(1.2)';
+        setTimeout(() => {
+          statusDot.style.transform = 'scale(1)';
+        }, 200);
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
