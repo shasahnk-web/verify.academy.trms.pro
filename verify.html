@@ -28,7 +28,7 @@
         </div>
       </div>
       
-      <div class="trust-score-container">
+      <div style="display: none;" class="trust-score-container">
         <div class="trust-score" id="trustScore">
           <div class="trust-label">Trust Score</div>
           <div class="trust-value" id="trustValue">98%</div>
@@ -51,7 +51,7 @@
     <p>Please wait while we verify your access...</p>
     
     <!-- Voice Control Panel -->
-    <div class="accessibility-controls">
+    <div style="display: none;" class="accessibility-controls">
       <button id="voiceToggle" class="voice-toggle" aria-label="Toggle voice countdown">
         🔊 Voice: <span id="voiceStatus">ON</span>
       </button>
@@ -258,7 +258,7 @@
 
     // Achievements system
     const achievements = [
-      { id: 'first_verification', name: 'First Steps', emoji: '🎯', requirement: 1 },
+      { id: 'first_verification', name: 'Final Steps', emoji: '🎯', requirement: 1 },
       { id: 'streak_5', name: 'Consistent', emoji: '🔥', requirement: 5 },
       { id: 'streak_10', name: 'Dedicated', emoji: '⭐', requirement: 10 },
       { id: 'streak_25', name: 'Expert', emoji: '👑', requirement: 25 },
@@ -352,10 +352,11 @@
     }
 
     function countdown() {
+      // Update display
       countdownElement.textContent = count;
       updateProgress(count, 10);
       
-      // Voice countdown for last 5 seconds
+      // Voice countdown for last 5 seconds - speak IMMEDIATELY when displayed
       if (voiceEnabled && count <= 5 && count > 0) {
         speak(count.toString());
       }
@@ -373,7 +374,7 @@
         
         // Voice completion message
         if (voiceEnabled) {
-          speak('Verification complete! You may now proceed.');
+          speak('Complete!');
         }
         
         // Completion haptic feedback
@@ -381,6 +382,9 @@
         
         // Start confetti animation
         createConfetti();
+        
+        // Hide achievements display
+        document.getElementById('achievementsDisplay').style.display = "none";
         
         countContainer.style.display = "none";
         verifyBtn.style.display = "block";
@@ -420,7 +424,7 @@
       // Initial voice announcement
       if (voiceEnabled) {
         setTimeout(() => {
-          speak('Verification process started. Voice countdown is enabled. Security monitoring active.');
+          speak('Verifying access. Countdown starting.');
         }, 500);
       }
     });
