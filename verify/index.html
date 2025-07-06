@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Server Closed</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .card {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 2rem;
+      border-radius: 16px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(8px);
+    }
+
+    .card h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #ffdddd;
+    }
+
+    .card p {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      color: #f5f5f5;
+    }
+
+    .owner {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: #ccc;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 1.5rem;
+      }
+
+      .card h1 {
+        font-size: 1.5rem;
+      }
+
+      .card p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🚫 Server Closed</h1>
+    <p>This server is currently unavailable because the owner <strong>Shashank</strong> did not renew it.</p>
+    <p>Please check back later or try contacting him for more information.</p>
+    <div class="owner">— Team Shashank</div>
+  </div>
+</body>
+</html>
