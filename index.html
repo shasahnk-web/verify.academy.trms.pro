@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,13 +9,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Secure access portal with multiple server options and verification system">
   <link rel="stylesheet" href="index.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>">
 </head>
 <body class="index-page">
 
   <!-- Animated Background Elements -->
   <div class="bg-elements">
+    <div class="bg-grid"></div>
+    <div class="bg-circle circle-1"></div>
+    <div class="bg-circle circle-2"></div>
     <div class="floating-orb orb-1"></div>
     <div class="floating-orb orb-2"></div>
     <div class="floating-orb orb-3"></div>
@@ -24,11 +29,16 @@
   <header class="header-section">
     <div class="logo-container">
       <span class="logo-icon">🔐</span>
-      <h2 class="brand-title">SecureAccess</h2>
+      <h2 class="brand-title">SecureAccess <span class="neon-text">Portal</span></h2>
     </div>
-    <div class="status-indicator">
-      <span class="status-dot"></span>
-      <span class="status-text"> System Online</span>
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <button class="theme-toggle" id="themeToggle">
+        <i class="material-icons">dark_mode</i>
+      </button>
+      <div class="status-indicator">
+        <span class="status-dot"></span>
+        <span class="status-text">System Online</span>
+      </div>
     </div>
   </header>
 
@@ -39,19 +49,24 @@
         <span class="badge-icon">⚡</span>
         <span>Instant Access</span>
       </div>
-      <h1>Generate Your Access Key</h1>
+      <h1>Generate Your <span class="neon-text">Access Key</span></h1>
+      <p class="hero-description">Secure portal with multiple server options and advanced verification system</p>
     </div>
 
     <!-- Server Selection -->
     <div class="server-section">
-      <div class="buttons server-grid">
-
+      <div class="section-header">
+        <h3>Choose Your Server</h3>
+        <p class="section-subtitle">Select from our available secure servers</p>
+      </div>
+      
+      <div class="server-grid">
         <a href="#" onclick="openRandomLink()" class="server-card">
           <div class="server-info">
             <div class="server-icon">🚀</div>
             <div class="server-details">
-              <div class="server-name">WEBSITE SERVER - 1 ✅</div>
-              <div class="server-location"></div>
+              <div class="server-name">WEBSITE SERVER - 1</div>
+              <div class="server-location">Primary Server • High Performance</div>
             </div>
           </div>
           <div class="server-status online">
@@ -64,14 +79,13 @@
           <div class="server-info">
             <div class="server-icon">⚡</div>
             <div class="server-details">
-              <div class="server-name">WEBSITE SERVER - 2 (CURRENTLY NOT WORKING)</div>
-              <div class="server-name">We are working on it. Available in few time.😁</div>
-              <div class="server-location"></div>
+              <div class="server-name">WEBSITE SERVER - 2</div>
+              <div class="server-location">Currently Under Maintenance</div>
             </div>
           </div>
-          <div class="server-status online">
-            <span class="status-indicator-mini"></span>
-            <span style="color:red;">Offline</span>
+          <div class="server-status">
+            <span class="status-indicator-mini" style="background: #ef4444;"></span>
+            <span style="color: #ef4444;">Offline</span>
           </div>
         </a>
 
@@ -87,27 +101,26 @@
             }
           })();
           return false;
-        " style="pointer-events: auto;" class="server-card">
+        " class="server-card">
           <div class="server-info">
             <div class="server-icon">🧑‍💻</div>
             <div class="server-details">
               <div class="server-name">SERVER - 2 (Beta)</div>
-              <div class="server-name">On Testing (Admin)</div>
-              <div class="server-location"></div>
+              <div class="server-location">Testing Environment • Admin Access</div>
             </div>
           </div>
-          <div class="server-status online">
-            <span class="status-indicator-mini"></span>
-            <span style="color:aqua">Testing</span>
+          <div class="server-status" style="background: rgba(0, 245, 255, 0.1); border-color: rgba(0, 245, 255, 0.3);">
+            <span class="status-indicator-mini" style="background: #00f5ff;"></span>
+            <span style="color: #00f5ff;">Testing</span>
           </div>
         </a>
 
-        <a href="https://youtu.be/uS2Eal1iO_g" class="server-card tutorial-card">
+        <a href="https://youtu.be/uS2Eal1iO_g" class="server-card">
           <div class="server-info">
             <div class="server-icon">📹</div>
             <div class="server-details">
               <div class="server-name">TUTORIAL VIDEO</div>
-              <div class="server-location">Step-by-step guide</div>
+              <div class="server-location">Step-by-step guide • Watch & Learn</div>
             </div>
           </div>
           <div class="server-status tutorial">
@@ -120,10 +133,10 @@
     <!-- Help Section -->
     <div class="help-section">
       <div class="help-card">
-        <div class="help-icon">❓</div>
+        <div class="help-icon">💡</div>
         <div class="help-content">
-          <h4>Need Help?</h4>
-          <p><strong>Watch the tutorial video</strong> if you're unsure how to proceed. It covers the entire verification process step by step.</p>
+          <h4>Need Help Getting Started?</h4>
+          <p><strong>Watch the tutorial video</strong> if you're unsure how to proceed. It covers the entire verification process step by step and helps you understand the system better.</p>
         </div>
       </div>
     </div>
@@ -153,10 +166,10 @@
 
     if (currentDate >= expiryDate) {
       serverSection.innerHTML = `
-        <div style="text-align:center; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 10px;">
-          <h2 style="color:#ff4d4d;">🚫 Server Expired</h2>
-          <p style="font-size:1.1rem; color:#fff;">This server has expired because the <strong>server premium</strong> was not renewed.</p>
-          <p style="color:#ccc;">Please try again later or contact the site administrator.</p>
+        <div style="text-align:center; padding: 2rem; background: var(--glass-bg); border-radius: 16px; border: 1px solid var(--glass-border); backdrop-filter: blur(10px);">
+          <h2 style="color: var(--danger); margin-bottom: 1rem;">🚫 Server Expired</h2>
+          <p style="font-size:1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">This server has expired because the <strong>server premium</strong> was not renewed.</p>
+          <p style="color: var(--text-secondary);">Please try again later or contact the site administrator.</p>
         </div>
       `;
     }
@@ -170,61 +183,106 @@
       window.location.href = links[randomIndex];
     }
 
-    function animateCounter(element, target, duration = 2000) {
-      const start = 0;
-      const increment = target / (duration / 16);
-      let current = start;
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-          current = target;
-          clearInterval(timer);
-        }
-        element.textContent = (target === 99.9) ? current.toFixed(1) : Math.floor(current);
-      }, 16);
+    // Dark/Light Mode Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    
+    // Check for saved theme preference or use preferred color scheme
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      body.classList.add('dark-mode');
+      themeToggle.innerHTML = '<i class="material-icons">light_mode</i>';
     }
+    
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      
+      // Update icon and save preference
+      if (body.classList.contains('dark-mode')) {
+        themeToggle.innerHTML = '<i class="material-icons">light_mode</i>';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        themeToggle.innerHTML = '<i class="material-icons">dark_mode</i>';
+        localStorage.setItem('theme', 'light');
+      }
+    });
 
+    // Initialize animations and effects
     document.addEventListener('DOMContentLoaded', () => {
-      const counters = document.querySelectorAll('.stat-number');
-      setTimeout(() => {
-        counters.forEach(counter => {
-          const target = parseFloat(counter.getAttribute('data-target'));
-          animateCounter(counter, target);
-        });
-      }, 500);
-
       const serverCards = document.querySelectorAll('.server-card');
       serverCards.forEach((card, index) => {
         card.style.animationDelay = `${index * 0.1}s`;
+        card.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-8px) scale(1.02)';
+        });
+        card.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0) scale(1)';
+        });
       });
 
-      const featureItems = document.querySelectorAll('.feature-item');
-      featureItems.forEach((item, index) => {
-        item.style.animationDelay = `${index * 0.15}s`;
+      // Add ripple effect to cards
+      document.querySelectorAll('.server-card, button').forEach(element => {
+        element.addEventListener('click', function(e) {
+          const ripple = document.createElement('span');
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          const x = e.clientX - rect.left - size / 2;
+          const y = e.clientY - rect.top - size / 2;
+          
+          ripple.style.width = ripple.style.height = size + 'px';
+          ripple.style.left = x + 'px';
+          ripple.style.top = y + 'px';
+          ripple.classList.add('ripple');
+          
+          this.appendChild(ripple);
+          
+          setTimeout(() => {
+            ripple.remove();
+          }, 600);
+        });
       });
     });
 
+    // Interactive background elements
     document.addEventListener('mousemove', (e) => {
       const orbs = document.querySelectorAll('.floating-orb');
       const mouseX = e.clientX / window.innerWidth;
       const mouseY = e.clientY / window.innerHeight;
+      
       orbs.forEach((orb, index) => {
-        const speed = (index + 1) * 20;
+        const speed = (index + 1) * 15;
         const x = mouseX * speed;
         const y = mouseY * speed;
         orb.style.transform = `translate(${x}px, ${y}px)`;
       });
     });
 
-    const statusDot = document.querySelector('.status-dot');
-    if (statusDot) {
-      setInterval(() => {
-        statusDot.style.transform = 'scale(1.2)';
-        setTimeout(() => {
-          statusDot.style.transform = 'scale(1)';
-        }, 200);
-      }, 2000);
-    }
+    // Add ripple effect styles
+    const style = document.createElement('style');
+    style.textContent = `
+      .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
+        transform: scale(0);
+        animation: ripple-animation 0.6s linear;
+        pointer-events: none;
+      }
+      
+      .dark-mode .ripple {
+        background: rgba(99, 102, 241, 0.6);
+      }
+      
+      @keyframes ripple-animation {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
   </script>
 </body>
 </html>
